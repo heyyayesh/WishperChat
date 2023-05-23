@@ -11,7 +11,7 @@ export default function Home() {
       py-12
       sm:px-6
       lg:px-8
-      bg-grey-100
+      bg-gray-100
     '>
       <div className="
         sm:mx-auto
@@ -26,7 +26,7 @@ export default function Home() {
           text-3xl
           font-bold
           tracking-tight
-          text-grey-900
+          text-gray-900
         ">Sign in to your account</h2>
       </div>
 

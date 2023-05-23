@@ -22,7 +22,7 @@ const Input: React.FC<InputProps> = ({label, id, type, required, register, error
         text-sm
         font-md
         leading-6
-        text-grey-900
+        text-gray-900
       ">
         {label}
       </label>
@@ -41,7 +41,7 @@ const Input: React.FC<InputProps> = ({label, id, type, required, register, error
             rounded-md
             border-0
             py-1.5
-            text-grey-900
+            text-gray-900
             shadow-md
             ring-1
             ring-inset
