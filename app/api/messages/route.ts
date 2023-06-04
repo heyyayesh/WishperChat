@@ -1,7 +1,8 @@
 import { NextResponse } from 'next/server';
-import getCurrentUser from '../../actions/getCurrentUser';
-import prisma from '../../libs/prismadb';
+
+import getCurrentUser from '@/app/actions/getCurrentUser';
 import { pusherServer } from '@/app/libs/pusher';
+import prisma from '@/app/libs/prismadb';
 
 export async function POST(request: Request) {
   try {
@@ -14,28 +15,24 @@ export async function POST(request: Request) {
     }
 
     const newMessage = await prisma.message.create({
+      include: {
+        seen: true,
+        sender: true,
+      },
       data: {
         body: message,
         image: image,
         conversation: {
-          connect: {
-            id: conversationId,
-          },
+          connect: { id: conversationId },
         },
         sender: {
-          connect: {
-            id: currentUser.id,
-          },
+          connect: { id: currentUser.id },
         },
         seen: {
           connect: {
             id: currentUser.id,
           },
         },
-      },
-      include: {
-        seen: true,
-        sender: true,
       },
     });
 
@@ -74,8 +71,8 @@ export async function POST(request: Request) {
     });
 
     return NextResponse.json(newMessage);
-  } catch (error: any) {
+  } catch (error) {
     console.log(error, 'ERROR_MESSAGES');
-    return new NextResponse('Internal Error', { status: 500 });
+    return new NextResponse('Error', { status: 500 });
   }
 }
